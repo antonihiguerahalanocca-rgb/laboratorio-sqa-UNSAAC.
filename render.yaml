@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: securelogin-guia04
+    runtime: python
+    plan: free
+    rootDir: guia04_login_seguro
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: EN_INTERNET
+        value: "1"
+      - key: DATABASE
+        value: /tmp/usuarios.db

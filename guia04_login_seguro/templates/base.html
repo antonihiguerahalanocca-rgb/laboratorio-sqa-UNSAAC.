@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{% endblock %} | SecureLogin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="pagina">
+    <aside class="lado">
+      <div class="marca"><span class="logo">SL</span> SecureLogin</div>
+      <h2>Tu cuenta, <span>protegida</span>.</h2>
+      <ul class="beneficios">
+        <li>Contraseñas cifradas con Argon2id</li>
+        <li>Bloqueo automático ante intentos fallidos</li>
+        <li>Sesión que expira a los 30 minutos</li>
+      </ul>
+      <p class="pie">Guía de Práctica 04 · Ingeniería de Software Seguro · UNSAAC</p>
+    </aside>
+    <main class="contenido">
+      {% block contenido %}{% endblock %}
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

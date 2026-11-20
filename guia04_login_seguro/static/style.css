@@ -83,4 +83,28 @@ input::-ms-reveal, input::-ms-clear { display: none; }   /* quita el ojito propi
 .boton:hover { background: var(--azul-hover); }
 .boton.secundario { background: var(--azul-oscuro); }
 
+/* Tareas (CRUD) */
+.tarjeta.ancha { max-width: 640px; }
+.cabecera { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.cabecera .sub a { color: var(--gris); font-weight: 500; }
+.boton.chico { width: auto; display: inline-block; padding: 10px 16px; font-size: 14px; white-space: nowrap; }
+.buscador { display: flex; gap: 8px; margin-bottom: 6px; }
+.buscador input { flex: 1; }
+.tarea { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border: 1.5px solid var(--borde); border-radius: 12px; margin-top: 12px; }
+.tarea-titulo { font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; word-break: break-word; }
+.tarea-desc { margin: 4px 0 0; font-size: 13.5px; color: var(--gris); word-break: break-word; }
+.estado { font-size: 11.5px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.estado.pendiente { background: #fff4e0; color: #b26b00; }
+.estado.en_progreso { background: #e8efff; color: var(--azul); }
+.estado.completada { background: #e3f7ef; color: #0b8a63; }
+.acciones { display: flex; gap: 4px; }
+.acciones form { margin: 0; }
+.icono { border: 0; background: #f2f4fa; border-radius: 8px; padding: 8px 10px; cursor: pointer; text-decoration: none; font-size: 15px; }
+.icono:hover { background: #e4e8f6; }
+.vacio { text-align: center; color: var(--gris); padding: 30px 0 10px; }
+.opcional { color: var(--gris); font-weight: 400; }
+textarea, select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--borde); border-radius: 10px; font: inherit; font-size: 15px; background: #fff; }
+textarea:focus, select:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(59, 108, 255, .15); }
+.aviso.error { background: #fdecec; color: #b42318; }
+
 @media (max-width: 800px) { .lado { display: none; } }

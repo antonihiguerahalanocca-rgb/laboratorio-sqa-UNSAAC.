@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block titulo %}Mis tareas{% endblock %}
+{% block contenido %}
+<div class="tarjeta ancha">
+  <div class="cabecera">
+    <div>
+      <h1>Mis tareas</h1>
+      <p class="sub">Hola, {{ nombre }} · <a href="{{ url_for('logout') }}">Cerrar sesión</a></p>
+    </div>
+    <a class="boton chico" href="{{ url_for('nueva_tarea') }}">+ Nueva tarea</a>
+  </div>
+
+  {% if aviso %}<div class="aviso ok">Tarea {{ aviso }} correctamente.</div>{% endif %}
+
+  <form method="get" class="buscador">
+    <input name="q" value="{{ q }}" placeholder="Buscar por título..." maxlength="80">
+    <button class="boton chico" type="submit">Buscar</button>
+  </form>
+  {% if error %}<small class="msg error">{{ error }}</small>{% endif %}
+
+  {% for t in tareas %}
+  <div class="tarea">
+    <div class="tarea-info">
+      <div class="tarea-titulo">{{ t['titulo'] }} <span class="estado {{ t['estado'] }}">{{ estados[t['estado']] }}</span></div>
+      {% if t['descripcion'] %}<p class="tarea-desc">{{ t['descripcion'] }}</p>{% endif %}
+    </div>
+    <div class="acciones">
+      <a class="icono" href="{{ url_for('editar_tarea', tarea_id=t['id']) }}" title="Editar">✏️</a>
+      <form method="post" action="{{ url_for('eliminar_tarea', tarea_id=t['id']) }}" data-confirmar="¿Eliminar la tarea &quot;{{ t['titulo'] }}&quot;?">
+        <button class="icono" type="submit" title="Eliminar">🗑️</button>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <p class="vacio">{% if q %}No hay tareas que coincidan con “{{ q }}”.{% else %}Aún no tienes tareas. ¡Crea la primera!{% endif %}</p>
+  {% endfor %}
+</div>
+{% endblock %}

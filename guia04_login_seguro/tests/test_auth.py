@@ -58,7 +58,16 @@ def test_fuerza_bruta_bloquea_la_cuenta():
     for i in range(5):
         entrar(c, "bruta@unsaac.edu.pe", f"Mala#{i}xxxxxxx")
     r = entrar(c, "bruta@unsaac.edu.pe", CLAVE)  # ni con la clave correcta entra
-    assert "bloqueada temporalmente" in r.get_data(as_text=True)
+    assert r.status_code == 429 and "bloqueada temporalmente" in r.get_data(as_text=True)
+
+
+def test_intento_fallido_se_registra_sin_password(caplog):
+    c = cliente()
+    registrar(c, "log@unsaac.edu.pe")
+    r = entrar(c, "log@unsaac.edu.pe", "ClaveSecreta#999")
+    assert r.status_code == 401
+    assert "login_fallido cuenta=log@unsaac.edu.pe" in caplog.text
+    assert "ClaveSecreta#999" not in caplog.text
 
 
 def test_panel_sin_sesion_redirige_al_login():

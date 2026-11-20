@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar tarea' if editar else 'Nueva tarea' }}{% endblock %}
+{% block contenido %}
+<div class="tarjeta">
+  <h1>{{ 'Editar tarea' if editar else 'Nueva tarea' }}</h1>
+  <p class="sub"><a href="{{ url_for('tareas') }}">← Volver a mis tareas</a></p>
+
+  <form method="post" novalidate>
+    <div class="campo">
+      <label for="titulo">Título</label>
+      <input id="titulo" name="titulo" value="{{ datos.titulo or '' }}" placeholder="Ej: Estudiar para el examen de ISW">
+      {% if errores.titulo %}<small class="msg error">{{ errores.titulo }}</small>{% endif %}
+    </div>
+
+    <div class="campo">
+      <label for="descripcion">Descripción <span class="opcional">(opcional)</span></label>
+      <textarea id="descripcion" name="descripcion" rows="4" placeholder="Detalles de la tarea...">{{ datos.descripcion or '' }}</textarea>
+      {% if errores.descripcion %}<small class="msg error">{{ errores.descripcion }}</small>{% endif %}
+    </div>
+
+    <div class="campo">
+      <label for="estado">Estado</label>
+      <select id="estado" name="estado">
+        {% for valor, texto in estados.items() %}
+        <option value="{{ valor }}" {% if datos.estado == valor %}selected{% endif %}>{{ texto }}</option>
+        {% endfor %}
+      </select>
+      {% if errores.estado %}<small class="msg error">{{ errores.estado }}</small>{% endif %}
+    </div>
+
+    <button class="boton" type="submit">{{ 'Guardar cambios' if editar else 'Registrar tarea' }}</button>
+  </form>
+</div>
+{% endblock %}

@@ -12,6 +12,13 @@ document.querySelectorAll(".ojo").forEach(function (boton) {
   });
 });
 
+// Confirmación antes de eliminar una tarea
+document.querySelectorAll("form[data-confirmar]").forEach(function (f) {
+  f.addEventListener("submit", function (e) {
+    if (!confirm(f.getAttribute("data-confirmar"))) e.preventDefault();
+  });
+});
+
 // 2) Validación del correo mientras escribe
 var correo = document.getElementById("correo");
 var msgCorreo = document.querySelector('[data-msg="correo"]');
